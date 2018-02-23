@@ -64,7 +64,7 @@ MongoClient.connect(dbUrl, function (err, client) {
 });
 
 function save(_id,data) {
-    MongoClient.connect("mongodb://localhost:27017", function (err, client) {
+    MongoClient.connect(dbUrl, function (err, client) {
         if (err) {
             return console.dir(err);
         }
