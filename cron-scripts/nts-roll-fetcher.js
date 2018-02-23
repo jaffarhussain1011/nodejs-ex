@@ -1,17 +1,15 @@
-phantom.casperPath = '/home/jaffarhussain/node-examples/scrapper/psed/node_modules/casperjs';
-phantom.injectJs('/home/jaffarhussain/node-examples/scrapper/psed/node_modules/casperjs/bin/bootstrap.js');
+var system = require('system');
+var args = system.args;
+var cnic = args[1];
+var PWD = args[2];
+var baseUrl = args[3];
+
+phantom.casperPath = PWD+'/node_modules/casperjs';
+phantom.injectJs(PWD+'/node_modules/casperjs/bin/bootstrap.js');
 var casper = require('casper').create({
     // logLevel: "debug",verbose: true
 });
 var fs = require('fs');
-var args = require('system').args;
-var db = null;
-var collection = null;
-var cnic = args[1];
-// var MongoClient = require('mongodb').MongoClient;
-var dbName = 'psed20172018';
-var collName = 'educators';
-var baseUrl = 'http://psed.nts.org.pk/PSED_2017_Result/Search.php';
 
 casper.start(baseUrl, function () {
     casper.waitForSelector("form.form_place", function () {
@@ -27,8 +25,7 @@ casper.then(function () {
     // this.echo(this.getPageContent()); 
     var data = this.evaluate(getData);
     this.echo(JSON.stringify(data));
-    //save to mongodb
-    // save(data);
+    
 });
 casper.run(function () {
     // this.echo('done');
