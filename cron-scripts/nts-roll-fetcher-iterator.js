@@ -22,7 +22,7 @@ MongoClient.connect(dbUrl, function (err, client) {
     var db = client.db('otrs20172018');
     var collection = db.collection('Person');
     var index = 0;
-    var limit = 10;
+    var limit = 20;
     collection.find(
         {rollnumbers: {$size:0},$or:[{attempt:null},{attempt: {$lte:5}}]}
     ).skip(
