@@ -9,12 +9,12 @@ var dbPort = process.env.MONGODB_SERVICE_PORT || '27017';
 var PWD = process.env.PWD || '/home/jaffarhussain/nodejs-ex';
 var dbUrl = "mongodb://localhost:27017";
 var baseUrl = process.argv[2];
-console.log(baseUrl);
+console.log('.');
 
 if(dbUser && dbPass){
     var dbUrl = "mongodb://"+dbUser+":"+dbPass+"@"+dbHost+":"+dbPort+"/"+dbName;
 }
-console.log(dbUrl);
+console.log('..');
 MongoClient.connect(dbUrl, function (err, client) {
     if (err) {
         return console.dir(err);
@@ -39,7 +39,7 @@ MongoClient.connect(dbUrl, function (err, client) {
                 save(person._id,JSON.parse(data));
             }else{
                 collection.update({_id:person._id},{$inc: {attempt:1}}).then(function (doc) {
-                    console.log('closing after save');
+                    console.log('...');
                     client.close();
                 }).catch(function (err) {
                     console.log('closing after save -- err');
@@ -72,7 +72,7 @@ function save(_id,data) {
         var collection = db.collection('Person');
 
         collection.update({_id:_id},{$set:{rollnumbers:data}}).then(function (doc) {
-            console.log('closing after save');
+            console.log('...');
             client.close();
         }).catch(function (err) {
             console.log('closing after save -- err');
