@@ -31,7 +31,7 @@ MongoClient.connect(dbUrl, function (err, client) {
             {rollnumbers: {$size:0},$or:[{attempt:null},{attempt: {$lte:5}}]}
         ))).limit(limit).forEach(function (person) {
         index = index + 1;
-        console.log(person._id);
+        // console.log(person._id);
         var ls = phantomjs.exec(PWD+'/cron-scripts/nts-roll-fetcher.js', person._id, PWD ,baseUrl);    
         ls.stdout.on('data', (data) => {
             var doc = JSON.parse(data);
@@ -46,7 +46,7 @@ MongoClient.connect(dbUrl, function (err, client) {
                     client.close();
                 });
             }            
-            console.log(`stdout: ${data}`);
+            // console.log(`stdout: ${data}`);
 
             if (index >= limit) {
                 client.close();
